@@ -1,17 +1,27 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <button v-on:click="showModal">Sign Up</button>
+    <signup v-if="show"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Signup from './components/Signup'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Signup
+  },
+  data() {
+    return {
+      show: false,
+    }
+  },
+  methods: {
+    showModal: function() {
+      this.show = true;
+    },
   }
 }
 </script>
