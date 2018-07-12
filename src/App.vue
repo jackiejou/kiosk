@@ -1,29 +1,26 @@
 <template>
   <div id="app">
-    <button v-on:click="showModal">Sign Up</button>
-    <signup v-if="show"/>
+    <slideshow />
+    <signup />
   </div>
 </template>
 
 <script>
-import Signup from './components/Signup'
+import Signup from './components/Signup';
+import Slideshow from './components/Slideshow';
 
 export default {
   name: 'app',
   components: {
-    Signup
+    Signup,
+    Slideshow,
   },
   data() {
     return {
       show: false,
     }
   },
-  methods: {
-    showModal: function() {
-      this.show = true;
-    },
-  }
-}
+};
 </script>
 
 <style>
@@ -32,7 +29,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  position: relative;
 }
 </style>
