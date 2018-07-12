@@ -4,7 +4,7 @@
       <img id="slideshow" :src="currentImage">
     </transition>
     <h1 id="title">
-      Random.co Kiosk
+      Random.co Registration Kiosk
     </h1>
   </div>
 </template>
@@ -12,7 +12,7 @@
 <script>
 export default {
   name: 'Slideshow',
-  data() {
+  data: function () {
     return {
       images: [
         "https://images.pexels.com/photos/681336/pexels-photo-681336.jpeg",
@@ -28,7 +28,6 @@ export default {
     },
     next: function() {
       this.index++;
-      console.log(this.index)
     }
   },
   computed: {

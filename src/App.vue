@@ -15,7 +15,7 @@ export default {
     Signup,
     Slideshow,
   },
-  data() {
+  data: function() {
     return {
       show: false,
     }

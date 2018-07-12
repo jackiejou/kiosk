@@ -7,15 +7,17 @@
         <h2>
           Sign Up
         </h2>
-        <input type="text" placeholder="First Name" v-model="newUser.firstName">
+        <input type="text" placeholder="First Name" v-model="newUser.firstName" required>
         <br>
-        <input type="text" placeholder="Last Name" v-model="newUser.lastName">
+        <input type="text" placeholder="Last Name" v-model="newUser.lastName" required>
         <br>
-        <input type="email" placeholder="Email" v-model="newUser.email">
+        <input type="email" placeholder="Email" v-model="newUser.email" required>
         <br>
         <input type="submit" value="Submit">
         <br>
-        <p>{{ msg }}</p>
+        <p>
+          {{ msg }}
+        </p>
       </form>
     </div>
   </div>
@@ -26,36 +28,41 @@ import axios from 'axios';
 
 export default {
   name: 'signup',
-  data() {
+  data: function() {
     return  {
       show: false,
       newUser: {},
       msg: '',
+      urls: [
+        '117vd0a1',
+
+      ],
     }
   },
   methods: {
     showModal: function() {
       this.show = true;
     },
-    register: function (e) {
-      console.log(this.newUser.firstName, this.newUser.lastName, this.newUser.email);
+    register: function(e) {
       let temp = this;
       axios
-        .get('https://jsonplaceholder.typicode.com/users')
-        .then(function(response) {
-          console.log(response.data);
+        .post('https://helios-request-bin.herokuapp.com/117vd0a1', this.newUser)
+        .then((response) => {
+          console.log(`${temp.newUser} posted to , response is ${response.data}`);
           temp.msg = 'Signed up successfully!';
+          setTimeout(() => {
+            temp.msg = '';
+          }, 5000);
         });
       e.preventDefault();
     },
-    close: function () {
+    close: function() {
       this.show = false;
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #button {
   background-color: lightcoral;
@@ -69,6 +76,7 @@ export default {
   color: white;
   margin: auto;
   box-shadow: 5px 5px 5px grey;
+  font-size: 20px;
 }
 
 #button:hover{
@@ -87,7 +95,7 @@ export default {
   height: 100%;
   overflow: auto;
   background-color: rgba(0,0,0,0.4);
-  padding-top: 60px;
+  padding-top: 180px;
 }
 
 #modal-content {
@@ -100,7 +108,7 @@ export default {
 }
 
 #close {
-  font-size: 50px;
+  font-size: 70px;
   top: 0;
   right: 30px;
   position: absolute;
@@ -137,7 +145,9 @@ input[type=submit] {
 }
 
 input:hover[type=submit] {
-
+  color: deepskyblue;
+  background-color: white;
+  font-weight: bold;
 }
 
 p {
