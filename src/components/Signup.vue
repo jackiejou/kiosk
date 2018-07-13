@@ -20,6 +20,7 @@
         </p>
       </form>
     </div>
+    <span v-on:click="update" id="update" title="Refresh">&#8635;</span>
   </div>
 </template>
 
@@ -35,8 +36,10 @@ export default {
       msg: '',
       urls: [
         '117vd0a1',
-
+        '1fy1k0y1',
+        '13i3wzl1',
       ],
+      index: 0,
     }
   },
   methods: {
@@ -46,9 +49,9 @@ export default {
     register: function(e) {
       let temp = this;
       axios
-        .post('https://helios-request-bin.herokuapp.com/117vd0a1', this.newUser)
+        .post(`https://helios-request-bin.herokuapp.com/${this.urls[this.index]}`, this.newUser)
         .then((response) => {
-          console.log(`${temp.newUser} posted to , response is ${response.data}`);
+          console.log(`${JSON.stringify(temp.newUser)} posted to request bin ${temp.urls[temp.index]}, response is ${response.data}`);
           temp.msg = 'Signed up successfully!';
           setTimeout(() => {
             temp.msg = '';
@@ -58,6 +61,10 @@ export default {
     },
     close: function() {
       this.show = false;
+    },
+    update: function() {
+      this.index++;
+      if (this.index >= this.urls.length) this.index = 0;
     }
   }
 }
@@ -152,5 +159,18 @@ input:hover[type=submit] {
 
 p {
   color:green;
+}
+
+#update {
+  font-size: 30px;
+  bottom: 20px;
+  right: 30px;
+  position: absolute;
+  color:white;
+}
+
+#update:hover {
+  color: red;
+  cursor: pointer;
 }
 </style>
